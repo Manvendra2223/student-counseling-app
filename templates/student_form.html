@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Info Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom right, #e0f7fa, #4fc3f7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 20px;
+        }
+        .card {
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            width: 100%;
+            max-width: 800px;
+            padding: 40px;
+        }
+        h4 {
+            font-weight: 600;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2 class="text-center text-primary mb-4">Student Information Form</h2>
+        <form method="POST">
+            <h4 class="text-secondary">Personal Information</h4>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label>Name</label>
+                    <input name="name" type="text" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <label>Email</label>
+                    <input name="email" type="email" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <label>Phone</label>
+                    <input name="phone" type="text" class="form-control" required>
+                </div>
+            </div>
+
+            <h4 class="text-secondary">Class 10 Marks</h4>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label>Math</label>
+                    <input name="math10" type="number" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <label>Science</label>
+                    <input name="science10" type="number" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <label>English</label>
+                    <input name="english10" type="number" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <label>Hindi</label>
+                    <input name="hindi10" type="number" class="form-control" required>
+                </div>
+            </div>
+
+            <h4 class="text-secondary">Class 12 Marks</h4>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label>Physics</label>
+                    <input name="physics12" type="number" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <label>Chemistry</label>
+                    <input name="chemistry12" type="number" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <label>Math</label>
+                    <input name="math12" type="number" class="form-control" required>
+                </div>
+            </div>
+
+            <h4 class="text-secondary">Branch Preferences</h4>
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <label>1st Preference</label>
+                    <input name="branch1" type="text" class="form-control" placeholder="e.g. CSE" required>
+                </div>
+                <div class="col-md-6">
+                    <label>2nd Preference</label>
+                    <input name="branch2" type="text" class="form-control" placeholder="e.g. IT" required>
+                </div>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg">Submit Information</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+

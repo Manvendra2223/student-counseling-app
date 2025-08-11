@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #f1ebeb, #2cb7e5);
+            min-height: 100vh;
+            padding: 30px;
+        }
+        h2 {
+            margin-bottom: 30px;
+        }
+        table {
+            font-size: 14px;
+        }
+        .btn-icon {
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center text-primary">Admin Dashboard - Student Rankings</h2>
+
+        <table class="table table-bordered table-hover bg-white">
+            <thead class="table-dark">
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>PCM Total</th>
+                    <th>Branch 1</th>
+                    <th>Branch 2</th>
+                    <th>Allotted Branch</th>
+                    <th>Confirmed</th>
+                    <th>Receipt</th>
+                    <th>Verify</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.phone }}</td>
+                    <td>{{ student.total_marks }}</td>
+                    <td>{{ student.branch1 }}</td>
+                    <td>{{ student.branch2 }}</td>
+
+                    <!-- Allotted Branch -->
+                    <td>
+                        {% if student.allotted_branch %}
+                            {{ student.allotted_branch }}
+                        {% else %}
+                            <form method="POST" action="{{ url_for('allot_branch') }}">
+                                <input type="hidden" name="email" value="{{ student.email }}">
+                                <select name="allotted_branch" class="form-select form-select-sm mb-1" required>
+                                    <option value="">--Select--</option>
+                                    <option value="{{ student.branch1 }}">{{ student.branch1 }}</option>
+                                    <option value="{{ student.branch2 }}">{{ student.branch2 }}</option>
+                                </select>
+                                <button type="submit" class="btn btn-sm btn-success">Allot</button>
+                            </form>
+                        {% endif %}
+                    </td>
+
+                    <!-- Confirmation Status -->
+                    <td>{{ student.confirmed or 'No' }}</td>
+
+                    <!-- Receipt View -->
+                    <td>
+                        {% if student.receipt_filename %}
+                            <a href="{{ url_for('uploaded_receipt', filename=student.receipt_filename) }}" 
+                               class="btn btn-sm btn-outline-primary btn-icon" target="_blank">
+                                📄 View
+                            </a>
+                        {% else %}
+                            ❌
+                        {% endif %}
+                    </td>
+
+                    <!-- Verification and Offer Letter -->
+                    <td>
+                        {% if student.verified != 'Yes' and student.receipt_filename %}
+                            <a href="{{ url_for('verify_receipt', email=student.email) }}" class="btn btn-sm btn-primary">Verify</a>
+                        {% elif student.verified == 'Yes' %}
+                            ✅ Verified <br>
+                            <a href="{{ url_for('offer_letter') }}" class="btn btn-sm btn-outline-success mt-1">Offer Letter</a>
+                        {% else %}
+                            ❌
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
